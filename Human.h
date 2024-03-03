@@ -2,6 +2,7 @@
 #define HUMAN_H
 
 #include "Player.h"
+#include <iostream>
 
 class Human : public Player {
 private:
