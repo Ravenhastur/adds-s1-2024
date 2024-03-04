@@ -1,17 +1,13 @@
-// Human.cpp
 #include "Human.h"
-#include <iostream>
-using namespace std;
-
-Human::Human(string name) : name(name) {}
+#include <iostream>::Human(std::string playerName) : name(playerName) {}
 
 char Human::makeMove() {
+    std::cout << "Enter move: ";
     char move;
-    cout << "Enter move: ";
-    cin >> move;
+    std::cin >> move;
     return move;
 }
 
-string Human::getName() {
+std::string Human::getName() {
     return name;
 }
