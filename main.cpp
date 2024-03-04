@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int main() {
+int main(){
     Human me("Mei");
     Computer computer;
     Referee referee;
@@ -18,6 +18,5 @@ int main() {
     } else {
         cout << winner->getName() << " Wins" << endl;
     }
-
     return 0;
 }
