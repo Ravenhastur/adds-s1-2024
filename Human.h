@@ -1,15 +1,16 @@
-// HUamn .h
 #ifndef HUMAN_H
 #define HUMAN_H
 
-#include <string>
-#include "Move.h"
-using namespace std;
+#include "Player.h"
 
-class Human {
+class Human : public Player {
+private:
+    string name;
+
 public:
-    virtual Move* makeMove() = 0;
-    virtual string getName() = 0;
+    Human(string name = "Human");
+    Move* makeMove() override;
+    string getName() override;
 };
 
-#endif // HUAMN_H
+#endif // HUMAN_H

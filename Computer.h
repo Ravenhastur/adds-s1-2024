@@ -1,10 +1,9 @@
-// Computer.h
 #ifndef COMPUTER_H
 #define COMPUTER_H
 
-#include "Human.h"
+#include "Player.h"
 
-class Computer : public Human {
+class Computer : public Player {
 public:
     Move* makeMove() override;
     string getName() override;
