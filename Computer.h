@@ -5,8 +5,9 @@
 
 class Computer : public Player {
 public:
+Computer():Player("Computer") {};
     Move* makeMove() ;
-    Computer():Player("Computer") {};
+    
 };
 
 #endif // COMPUTER_H

@@ -1,5 +1,5 @@
-#ifndef PAPER_FILE
-#define PAPER_FILE
+#ifndef PAPER_H
+#define PAPER_H
 
 #include "Move.h"
 #include <iostream>
