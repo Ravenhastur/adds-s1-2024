@@ -5,12 +5,12 @@
 
 class Human : public Player {
 private:
-    string name;
+    std::string name;
 
 public:
-    Human(string name = "Human");
+    Human(std::string name = "Human");
     Move* makeMove() override;
-    string getName() override;
+    std::string getName() override;
 };
 
 #endif // HUMAN_H
