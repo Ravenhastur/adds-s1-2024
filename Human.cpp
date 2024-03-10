@@ -1,16 +1,26 @@
+
 #include "Human.h"
 #include <iostream>
+#include "Rock.h" // Include move headers here
+// Include other move headers as well
 
-Human::Human(std::string name) : name(name) {}
+using namespace std;
+
+Human::Human(string name) : name(name) {}
 
 Move* Human::makeMove() {
-    std::string moveName;
-    std::cout << "Enter Move for " << name << ": ";
-    std::cin >> moveName;
-    // Implement logic to return corresponding move object based on input
-    return nullptr; // Placeholder
+    string moveName;
+    cout << "Enter Move: ";
+    cin >> moveName;
+
+    // Return corresponding move object based on input
+    if (moveName == "Rock")
+        return new Rock();
+    // Handle other moves similarly
+
+    return nullptr; // Return nullptr for invalid move
 }
 
-std::string Human::getName() {
+string Human::getName() {
     return name;
 }
