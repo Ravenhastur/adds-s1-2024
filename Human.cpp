@@ -1,7 +1,5 @@
 #include "Human.h"
 #include <iostream>
-#include "Rock.h" // Include move headers here
-// Include other move headers as well
 
 using namespace std;
 
@@ -11,13 +9,8 @@ Move* Human::makeMove() {
     string moveName;
     cout << "Enter Move: ";
     cin >> moveName;
-
-    // Return corresponding move object based on input
-    if (moveName == "Rock")
-        return new Rock();
-    // Handle other moves similarly
-
-    return nullptr; // Return nullptr for invalid move
+    // Assuming input is valid, you might need additional error handling
+    return createMove(moveName);
 }
 
 string Human::getName() {
