@@ -1,12 +1,15 @@
+
+
 #include "Computer.h"
-// #include "Rock.h" // Include move headers here
+#include "Rock.h"
+#include <iostream>
 
+using namespace std;
 
-// Move* Computer::makeMove() {
-//     // Computer always plays Rock for simplicity
-//     return new Rock();
-// }
+Move* Computer::makeMove(){
 
-// string Computer::getName() {
-//     return "Computer";
-// }
+    Move* RockMove = new Rock();
+    return RockMove;
+
+}
+

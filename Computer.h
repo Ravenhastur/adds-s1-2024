@@ -5,8 +5,8 @@
 
 class Computer : public Player {
 public:
-    Move* makeMove() override;
-    string getName() override;
+    Move* makeMove() ;
+    Computer():Player("Computer") {};
 };
 
 #endif // COMPUTER_H

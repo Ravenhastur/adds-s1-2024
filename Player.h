@@ -7,7 +7,11 @@
 using namespace std;
 
 class Player {
+    private:
+    string name;
 public:
+Player();
+Player(string name);
     virtual Move* makeMove() = 0;
     virtual string getName() = 0;
 };
