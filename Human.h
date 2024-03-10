@@ -1,6 +1,6 @@
-// Player.h
-#ifndef PLAYER_H
-#define PLAYER_H
+// HUamn .h
+#ifndef HUMAN_H
+#define HUMAN_H
 
 #include <string>
 #include "Move.h"
@@ -12,4 +12,4 @@ public:
     virtual string getName() = 0;
 };
 
-#endif // PLAYER_H
+#endif // HUAMN_H
