@@ -4,7 +4,7 @@
 
 #include "Human.h"
 
-class Computer : public Player {
+class Computer : public Human {
 public:
     Move* makeMove() override;
     string getName() override;

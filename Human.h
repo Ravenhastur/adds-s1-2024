@@ -6,7 +6,7 @@
 #include "Move.h"
 using namespace std;
 
-class Player {
+class Human {
 public:
     virtual Move* makeMove() = 0;
     virtual string getName() = 0;
