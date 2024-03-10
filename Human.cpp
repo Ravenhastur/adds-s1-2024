@@ -1,4 +1,3 @@
-
 #include "Human.h"
 #include <iostream>
 #include "Rock.h" // Include move headers here

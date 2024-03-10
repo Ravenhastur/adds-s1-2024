@@ -1,12 +1,12 @@
-#ifndef COMPUTER_H
-#define COMPUTER_H
+#include "Computer.h"
+#include "Rock.h" // Include move headers here
 
-#include "Player.h"
 
-class Computer : public Player {
-public:
-    Move* makeMove() override;
-    string getName() override;
-};
+Move* Computer::makeMove() {
+    // Computer always plays Rock for simplicity
+    return new Rock();
+}
 
-#endif // COMPUTER_H
+string Computer::getName() {
+    return "Computer";
+}
