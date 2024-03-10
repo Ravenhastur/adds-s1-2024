@@ -3,9 +3,9 @@
 
 Referee::Referee() {}
 
-Player* Referee::refGame(Player* player1, Player* player2) {
-    Move* move1 = player1->makeMove();
-    Move* move2 = player2->makeMove();
+Human* Referee::refGame(Human* human1, Human* human2) {
+    Move* move1 = human1->makeMove();
+    Move* move2 = human2->makeMove();
 
     // Logic to determine winner based on moves
 
