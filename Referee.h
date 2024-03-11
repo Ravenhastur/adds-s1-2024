@@ -1,6 +1,6 @@
 
-#ifndef REFEREE_H
-#define REFEREE_H
+#ifndef REFEREE_FILE
+#define REFEREE_FILE
 
 #include "Player.h"
 

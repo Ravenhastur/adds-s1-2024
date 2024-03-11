@@ -1,5 +1,5 @@
-#ifndef PAPER_H
-#define PAPER_H
+#ifndef PAPER_FILE
+#define PAPER_FILE
 
 #include "Move.h"
 #include <iostream>
@@ -9,7 +9,7 @@ using namespace std;
 
 class Paper : public Move{
     public:
-        Paper();    
+    Paper();    
 };
 
 #endif

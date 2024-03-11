@@ -1,5 +1,5 @@
- #ifndef PLAYER_H
-#define PLAYER_H
+#ifndef PLAYER_FILE
+#define PLAYER_FILE
 
 #include "Move.h"
 
@@ -10,7 +10,7 @@ class Player {
     private:
     string name;
 public:
-Player();
+Player(){};
 Player(string name);
     virtual Move* makeMove() = 0;
     virtual string getName() = 0;

@@ -1,5 +1,5 @@
-#ifndef COMPUTER_H
-#define COMPUTER_H
+#ifndef COMPUTER_FILE
+#define COMPUTER_FILE
 #include <iostream>
 #include "Player.h"
 

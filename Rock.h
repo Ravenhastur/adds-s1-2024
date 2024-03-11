@@ -1,6 +1,6 @@
 // Rock.h
-#ifndef ROCK_H
-#define ROCK_H
+#ifndef ROCK_FILE
+#define ROCK_FILE
 
 #include "Move.h"
 

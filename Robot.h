@@ -1,5 +1,5 @@
-#ifndef ROBOT_H
-#define ROBOT_H
+#ifndef ROBOT_FILE
+#define ROBOT_FILE
 #include "Move.h"
 #include <iostream>
 #include <string>

@@ -1,5 +1,5 @@
-#ifndef ZOMBIE_H
-#define ZOMBIE_H
+#ifndef ZOMBIE_FILE
+#define ZOMBIE_FILE
 
 #include "Move.h"
 #include <iostream>
