@@ -1,5 +1,3 @@
-
-
 #include "Scissors.h"
 #include <vector>
 #include <string>
