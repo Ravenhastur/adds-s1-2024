@@ -14,14 +14,14 @@ int Reverser::reverseDigitHelper(int value, int reversed) {
     return reverseDigitHelper(value / 10, reversed * 10 + value % 10);
 }
 
-std::string Reverser::reverseString(std::string characters) {
+std::string Reverser::reverseString(string characters) {
     if (characters.empty()) {
         return "ERROR"; // Invalid input
     }
     return reverseStringHelper(characters, characters.length() - 1);
 }
 
-std::string Reverser::reverseStringHelper(const std::string& characters, int index) {
+std::string Reverser::reverseStringHelper(const string& characters, int index) {
     if (index == 0) {
         return std::string(1, characters[index]);
     }
