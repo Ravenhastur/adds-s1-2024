@@ -27,3 +27,4 @@ std::string Reverser::reverseStringHelper(const string& characters, int index) {
     }
     return characters[index] + reverseStringHelper(characters, index - 1);
 }
+
