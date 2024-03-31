@@ -1,22 +1,28 @@
 #include "Finder.h"
-#include <iostream>
-#include <string>
-#include <vector>
+
+using namespace std;
 
 int main()
 {
-    std::string s2[] = { "1", "3", "4" };
+    string s2[] = { "1", "4", "3" , "2" , "5"};
     Finder finder;
-    std::vector<int> result;
-    std::string s1 = "3";
+    vector<int> result;
+    string s1 = "3";
 
-    result = finder.findSubstrings(s1, s2[2]);
+    for (size_t i = 0; i < sizeof(s2) / sizeof(s2[0]); i++) {
+        size_t found = s1.find(s2[i]);
+        if (found != string::npos) {
+            result.push_back(found);
+        } else {
+            result.push_back(-1);
+        }
+    }
 
-for (size_t i = 0; i < result.size(); i++) {
+    for (size_t i = 0; i < result.size(); i++) {
     int value = result[i];
     cout << value << " ";
 }
-cout << endl;
+    cout << endl;
 
     return 0;
 }
