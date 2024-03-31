@@ -17,7 +17,7 @@ vector<int> Finder::findSubstrings(string s1, string s2) {
             break; // No need to search for longer prefixes
         } else {
             result.push_back(found);
-            pos = found + 1; // Start searching from the next position
+            pos = found ; // Start searching from the next position
         }
     }
 
