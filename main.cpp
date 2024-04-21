@@ -20,7 +20,7 @@ int main() {
     list = quickSort.sort(list);
 
     RecursiveBinarySearch binarySearch;
-    bool found = binarySearch.search(list, 1);
+    bool found = binarySearch.search(list, 0); // Change the search target to 0
 
     std::cout << (found ? "true" : "false") << " ";
     for (int num : list) {
