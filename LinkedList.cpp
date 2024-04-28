@@ -1,5 +1,7 @@
 #include <iostream>
 #include "LinkedList.h"
+#include <limits>
+#include "Node.h"
 
 LinkedList::LinkedList() {
     head = nullptr;
