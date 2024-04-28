@@ -17,6 +17,14 @@ std::list<int> BigNumCalc::add(std::list<int> num1, std::list<int> num2) {
     int carry = 0;
     auto it1 = num1.rbegin(), it2 = num2.rbegin();
 
+    // Add leading zeros to the shorter number
+    while (num1.size() < num2.size()) {
+        num1.push_front(0);
+    }
+    while (num2.size() < num1.size()) {
+        num2.push_front(0);
+    }
+
     while (it1 != num1.rend() || it2 != num2.rend()) {
         int sum = carry;
         if (it1 != num1.rend()) {
