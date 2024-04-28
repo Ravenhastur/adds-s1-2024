@@ -1,81 +1,116 @@
-#include "BigNumCalc.h"
+#include <iostream>
+#include "LinkedList.h"
+#include <limits>
+#include "Node.h"
 
-std::list<int> BigNumCalc::buildBigNum(std::string numString) {
-    std::list<int> bigNum;
-    for (char c : numString) {
-        if (isdigit(c)) {
-            bigNum.push_front(c - '0');
-        }
-    }
-    return bigNum;
+LinkedList::LinkedList() {
+    head = nullptr;
 }
 
-std::list<int> BigNumCalc::add(std::list<int> num1, std::list<int> num2) {
-    std::list<int> result;
-    int carry = 0;
-    auto it1 = num1.rbegin(), it2 = num2.rbegin();
-
-    while (it1 != num1.rend() || it2 != num2.rend()) {
-        int sum = carry;
-        if (it1 != num1.rend()) {
-            sum += *it1++;
-        }
-        if (it2 != num2.rend()) {
-            sum += *it2++;
-        }
-        result.push_front(sum % 10);
-        carry = sum / 10;
+LinkedList::LinkedList(int* array, int len) {
+    head = nullptr;
+    for (int i = 0; i < len; i++) {
+        insertPosition(i + 1, array[i]);
     }
-
-    if (carry) {
-        result.push_front(carry);
-    }
-
-    return result;
 }
 
-std::list<int> BigNumCalc::sub(std::list<int> num1, std::list<int> num2) {
-    std::list<int> result;
-    int borrow = 0;
-    auto it1 = num1.rbegin(), it2 = num2.rbegin();
+LinkedList::~LinkedList() {
+    Node* curr = head;
+    while (curr != nullptr) {
+        Node* temp = curr;
+        curr = curr->link;
+        delete temp;
+    }
+}
 
-    while (it1 != num1.rend()) {
-        int diff = *it1 - borrow;
-        if (it2 != num2.rend()) {
-            diff -= *it2++;
+void LinkedList::insertPosition(int pos, int newNum) {
+    Node* newNode = new Node;
+    newNode->data = newNum;
+    newNode->link = nullptr;
+
+    if (pos <= 1) {
+        newNode->link = head;
+        head = newNode;
+    } else {
+        Node* curr = head;
+        for (int i = 1; i < pos - 1 && curr != nullptr; i++) {
+            curr = curr->link;
         }
-        if (diff < 0) {
-            diff += 10;
-            borrow = 1;
+
+        if (curr == nullptr) {
+            Node* tail = head;
+            while (tail->link != nullptr) {
+                tail = tail->link;
+            }
+            tail->link = newNode;
         } else {
-            borrow = 0;
+            newNode->link = curr->link;
+            curr->link = newNode;
         }
-        result.push_front(diff);
-        it1++;
     }
-
-    while (!result.empty() && result.front() == 0) {
-        result.pop_front();
-    }
-
-    return result;
 }
 
-std::list<int> BigNumCalc::mul(std::list<int> num1, std::list<int> num2) {
-    std::list<int> result;
-    int carry = 0;
-    int multiplier = num2.front();
-    num2.pop_front();
-
-    for (int digit : num1) {
-        int product = digit * multiplier + carry;
-        result.push_back(product % 10);
-        carry = product / 10;
+bool LinkedList::deletePosition(int pos) {
+    if (pos <= 0 || head == nullptr) {
+        return false;
     }
 
-    if (carry) {
-        result.push_back(carry);
+    Node* curr = head;
+    if (pos == 1) {
+        head = curr->link;
+        delete curr;
+        return true;
     }
 
-    return result;
+    for (int i = 1; i < pos - 1 && curr->link != nullptr; i++) {
+        curr = curr->link;
+    }
+
+    if (curr->link == nullptr) {
+        return false;
+    }
+
+    Node* temp = curr->link;
+    curr->link = temp->link;
+    delete temp;
+    return true;
+}
+
+int LinkedList::get(int pos) {
+    Node* curr = head;
+    for (int i = 1; i < pos && curr != nullptr; i++) {
+        curr = curr->link;
+    }
+
+    if (curr == nullptr) {
+        return std::numeric_limits<int>::max();
+    }
+
+    return curr->data;
+}
+
+int LinkedList::search(int target) {
+    Node* curr = head;
+    int pos = 1;
+    while (curr != nullptr) {
+        if (curr->data == target) {
+            return pos;
+        }
+        curr = curr->link;
+        pos++;
+    }
+    return -1;
+}
+
+void LinkedList::printList() {
+    std::cout << "[";
+    Node* curr = head;
+    while (curr != nullptr) {
+        std::cout << curr->data;
+        curr = curr->link;
+        if (curr != nullptr) {
+            std::cout << " ";
+        }
+    }
+    std::cout << "]";
 }
