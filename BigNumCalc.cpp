@@ -8,21 +8,24 @@ std::list<int> BigNumCalc::buildBigNum(const std::string& numString) {
     return result;
 }
 
-std::list<int> BigNumCalc::add(std::list<int> num1, std::list<int> num2) {
+std::list<int> BigNumCalc::add(const std::list<int>& num1, const std::list<int>& num2) {
     std::list<int> sum;
     int carry = 0;
 
-    while (!num1.empty() || !num2.empty() || carry != 0) {
+    std::list<int>::const_reverse_iterator it1 = num1.rbegin();
+    std::list<int>::const_reverse_iterator it2 = num2.rbegin();
+
+    while (it1 != num1.rend() || it2 != num2.rend() || carry != 0) {
         int digitSum = carry;
 
-        if (!num1.empty()) {
-            digitSum += num1.back();
-            num1.pop_back();
+        if (it1 != num1.rend()) {
+            digitSum += *it1;
+            ++it1;
         }
 
-        if (!num2.empty()) {
-            digitSum += num2.back();
-            num2.pop_back();
+        if (it2 != num2.rend()) {
+            digitSum += *it2;
+            ++it2;
         }
 
         carry = digitSum / 10;
@@ -33,21 +36,24 @@ std::list<int> BigNumCalc::add(std::list<int> num1, std::list<int> num2) {
     return sum;
 }
 
-std::list<int> BigNumCalc::sub(std::list<int> num1, std::list<int> num2) {
+std::list<int> BigNumCalc::sub(const std::list<int>& num1, const std::list<int>& num2) {
     std::list<int> difference;
     int borrow = 0;
 
-    while (!num1.empty() || !num2.empty()) {
+    std::list<int>::const_reverse_iterator it1 = num1.rbegin();
+    std::list<int>::const_reverse_iterator it2 = num2.rbegin();
+
+    while (it1 != num1.rend() || it2 != num2.rend()) {
         int digitDiff = borrow;
 
-        if (!num1.empty()) {
-            digitDiff += num1.back();
-            num1.pop_back();
+        if (it1 != num1.rend()) {
+            digitDiff += *it1;
+            ++it1;
         }
 
-        if (!num2.empty()) {
-            digitDiff -= num2.back();
-            num2.pop_back();
+        if (it2 != num2.rend()) {
+            digitDiff -= *it2;
+            ++it2;
         }
 
         if (digitDiff < 0) {
@@ -68,24 +74,33 @@ std::list<int> BigNumCalc::sub(std::list<int> num1, std::list<int> num2) {
     return difference;
 }
 
-std::list<int> BigNumCalc::mul(std::list<int> num1, std::list<int> num2) {
-    int singleDigit = num2.front();
-    num2.pop_front();
-
+std::list<int> BigNumCalc::mul(const std::list<int>& num1, const std::list<int>& num2) {
     std::list<int> product;
-    int carry = 0;
 
-    while (!num1.empty() || carry != 0) {
-        int digitProduct = carry;
+    for (int i = 0; i < num2.size(); ++i) {
+        int singleDigit = *(num2.rbegin());
+        std::list<int> tempProduct(i, 0);
 
-        if (!num1.empty()) {
-            digitProduct += num1.back() * singleDigit;
-            num1.pop_back();
+        int carry = 0;
+
+        std::list<int>::const_reverse_iterator it = num1.rbegin();
+
+        while (it != num1.rend() || carry != 0) {
+            int digitProduct = carry;
+
+            if (it != num1.rend()) {
+                digitProduct += *it * singleDigit;
+                ++it;
+            }
+
+            carry = digitProduct / 10;
+            digitProduct %= 10;
+            tempProduct.push_front(digitProduct);
         }
 
-        carry = digitProduct / 10;
-        digitProduct %= 10;
-        product.push_front(digitProduct);
+        product = add(product, tempProduct);
+
+        num2.pop_back();
     }
 
     // Remove leading zeroes
