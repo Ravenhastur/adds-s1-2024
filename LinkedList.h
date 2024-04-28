@@ -1,9 +1,13 @@
- #ifndef LINKEDLIST_H
-#define LINKEDLIST_H
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
 
+#include <limits>
 #include "Node.h"
 
 class LinkedList {
+private:
+    Node* head;
+
 public:
     LinkedList();
     LinkedList(int* array, int len);
@@ -13,9 +17,6 @@ public:
     int get(int pos);
     int search(int target);
     void printList();
-
-private:
-    Node* head;
 };
 
-#endif
+#endif // LINKED_LIST_H

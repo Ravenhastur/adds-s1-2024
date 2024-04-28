@@ -1,17 +1,12 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include <iostream>
-
 class Node {
-    private:
-        int data;
-        Node* link;
-    public:
-        Node(int data, Node* link);
-        int getData();
-        Node* getLink();
-        void setLink(Node* newLink);
+private:
+    int data;
+    Node* link;
+
+    friend class LinkedList;
 };
 
-#endif
+#endif // NODE_H
