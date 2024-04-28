@@ -1,3 +1,4 @@
+
 #include "BigNumCalc.h"
 
 std::list<int> BigNumCalc::buildBigNum(std::string numString) {
