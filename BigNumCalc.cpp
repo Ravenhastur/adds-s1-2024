@@ -34,13 +34,13 @@ std::list<int> BigNumCalc::add(std::list<int> num1, std::list<int> num2) {
             sum += *it2++;
         }
         result.push_front(sum % 10);
-        carry = sum;
+        carry = sum/10;
     }
 
     if (carry) {
         result.push_front(carry);
     }
-
+    result= result*10;
     return result;
 }
 
