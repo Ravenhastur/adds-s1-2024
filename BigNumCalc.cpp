@@ -40,7 +40,7 @@ std::list<int> BigNumCalc::add(std::list<int> num1, std::list<int> num2) {
     if (carry) {
         result.push_front(carry);
     }
-    result= result*10;
+    
     return result;
 }
 
