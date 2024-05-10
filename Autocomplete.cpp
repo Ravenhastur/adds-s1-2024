@@ -1,4 +1,4 @@
-#include "autocomplete.h"
+#include "Autocomplete.h"
 
 Autocomplete::Autocomplete() {
     root = new TrieNode();
