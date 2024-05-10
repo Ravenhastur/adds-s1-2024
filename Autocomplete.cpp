@@ -43,42 +43,52 @@
 // }
 
 
+#include "Autocomplete.h"
+
+// Autocomplete class implementation
 
 Autocomplete::Autocomplete() {
     root = new TrieNode();
 }
 
+void Autocomplete::traverseTrie(TrieNode* node, std::string prefix, std::vector<std::string>& suggestions) {
+    if (node == nullptr) return;
+
+    if (node->isEndOfWord) {
+        suggestions.push_back(prefix);
+    }
+
+    for (auto& pair : node->children) {
+        traverseTrie(pair.second, prefix + pair.first, suggestions);
+    }
+}
+
+std::vector<std::string> Autocomplete::getSuggestions(std::string partialWord) {
+    std::vector<std::string> suggestions;
+    TrieNode* current = root;
+
+    // Traverse to the node representing the prefix
+    for (char c : partialWord) {
+        if (current->children.find(c) == current->children.end()) {
+            // No words with this prefix, return empty vector
+            return suggestions;
+        }
+        current = current->children[c];
+    }
+
+    // Traverse the Trie to find words starting with the given prefix
+    traverseTrie(current, partialWord, suggestions);
+
+    return suggestions;
+}
+
 void Autocomplete::insert(std::string word) {
     TrieNode* current = root;
-    for (char &c : word) {
+    for (char c : word) {
         if (current->children.find(c) == current->children.end()) {
             current->children[c] = new TrieNode();
         }
         current = current->children[c];
     }
     current->isEndOfWord = true;
-}
-
-std::vector<std::string> Autocomplete::getSuggestions(std::string partialWord) {
-    std::vector<std::string> suggestions;
-    TrieNode* current = root;
-    for (char &c : partialWord) {
-        if (current->children.find(c) == current->children.end()) {
-            return suggestions;
-        }
-        current = current->children[c];
-    }
-    traverseTrie(current, partialWord, suggestions);
-    return suggestions;
-}
-
-void Autocomplete::traverseTrie(TrieNode* node, std::string prefix, std::vector<std::string>& suggestions) {
-    if (node->isEndOfWord) {
-        suggestions.push_back(prefix);
-    }
-    for (auto& pair : node->children) {
-        char c = pair.first;
-        TrieNode* child = pair.second;
-        traverseTrie(child, prefix + c, suggestions);
-    }
 }
