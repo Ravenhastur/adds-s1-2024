@@ -8,7 +8,7 @@
 // TrieNode class to represent each node in the Trie
 class TrieNode {
 public:
-    std::unordered_map<char, TrieNode*> children;
+    std::unordered_map<std:::string, TrieNode*> children;
     bool isEndOfWord;
 
     TrieNode() : isEndOfWord(false) {}
