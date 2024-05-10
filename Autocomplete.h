@@ -3,36 +3,33 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
-const int ALPHABET_SIZE = 26;
-
-// Trie Node
-struct TrieNode {
-    TrieNode* children[ALPHABET_SIZE];
+// TrieNode class to represent each node in the Trie
+class TrieNode {
+public:
+    std::unordered_map<char, TrieNode*> children;
     bool isEndOfWord;
 
-    TrieNode() {
-        isEndOfWord = false;
-        for (int i = 0; i < ALPHABET_SIZE; i++) {
-            children[i] = nullptr;
-        }
-    }
+    TrieNode() : isEndOfWord(false) {}
 };
 
-// Autocomplete Class
+// Autocomplete class
 class Autocomplete {
 private:
     TrieNode* root;
 
+    // Helper function to traverse the Trie and find words starting with a given prefix
+    void traverseTrie(TrieNode* node, std::string prefix, std::vector<std::string>& suggestions);
+
 public:
     Autocomplete();
 
-    void insert(std::string word);
-
+    // Function to return known words that start with partialWord
     std::vector<std::string> getSuggestions(std::string partialWord);
 
-private:
-    void collectWords(TrieNode* node, std::string prefix, std::vector<std::string>& suggestions);
+    // Function to add a word to the known words
+    void insert(std::string word);
 };
 
-#endif  // AUTOCOMPLETE_H
+#endif // AUTOCOMPLETE_H
