@@ -1,8 +1,11 @@
-// DocumentManager.cpp
 #include "DocumentManager.h"
 
 void DocumentManager::addDocument(std::string name, int id, int license_limit) {
-    documents[name] = {id, license_limit, 0};
+    Document document;
+    document.id = id;
+    document.license_limit = license_limit;
+    document.current_borrowers = 0;
+    documents[name] = document;
 }
 
 void DocumentManager::addPatron(int patronID) {
@@ -10,29 +13,30 @@ void DocumentManager::addPatron(int patronID) {
 }
 
 int DocumentManager::search(std::string name) {
-    auto it = documents.find(name);
-    return (it != documents.end()) ? it->second.id : 0;
+    if (documents.count(name) > 0) {
+        return documents[name].id;
+    }
+    return 0;
 }
 
 bool DocumentManager::borrowDocument(int docid, int patronID) {
-    if (patrons.find(patronID) == patrons.end()) {
-        return false;
+    if (documents.count(docid) > 0 && patrons.count(patronID) > 0) {
+        Document& document = documents[docid];
+        if (document.current_borrowers < document.license_limit) {
+            borrowed_documents[patronID].insert(docid);
+            document.current_borrowers++;
+            return true;
+        }
     }
-
-    auto it = documents.find(docid);
-    if (it == documents.end() || it->second.current_borrowers >= it->second.license_limit) {
-        return false;
-    }
-
-    borrowed_documents[docid].insert(patronID);
-    it->second.current_borrowers++;
-    return true;
+    return false;
 }
 
 void DocumentManager::returnDocument(int docid, int patronID) {
-    auto it = borrowed_documents.find(docid);
-    if (it != borrowed_documents.end()) {
-        it->second.erase(patronID);
-        documents[docid].current_borrowers--;
+    if (documents.count(docid) > 0 && patrons.count(patronID) > 0) {
+        Document& document = documents[docid];
+        if (borrowed_documents[patronID].count(docid) > 0) {
+            borrowed_documents[patronID].erase(docid);
+            document.current_borrowers--;
+        }
     }
 }
