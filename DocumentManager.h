@@ -1,4 +1,4 @@
- #ifndef DOCUMENT_MANAGER_H
+#ifndef DOCUMENT_MANAGER_H
 #define DOCUMENT_MANAGER_H
 
 #include <string>
@@ -7,7 +7,6 @@
 
 class DocumentManager {
 private:
-    // Internal class to represent a document
     struct Document {
         std::string name;
         int id;
