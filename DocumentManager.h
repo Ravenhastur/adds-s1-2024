@@ -1,17 +1,9 @@
-// DocumentManager.h
-#ifndef DOCUMENT_MANAGER_H
-#define DOCUMENT_MANAGER_H
+#ifndef DOCUMENTMANAGER_H
+#define DOCUMENTMANAGER_H
 
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
-#include <set>
-
-struct Document {
-    int id;
-    int license_limit;
-    int current_borrowers;
-};
 
 class DocumentManager {
 public:
@@ -22,9 +14,15 @@ public:
     void returnDocument(int docid, int patronID);
 
 private:
-    std::unordered_map<std::string, Document> documents;
+    struct Document {
+        std::string name;
+        int id;
+        int license_limit;
+        int borrowed_count;
+    };
+
+    std::unordered_map<int, Document> documents;
     std::unordered_set<int> patrons;
-    std::unordered_map<int, std::set<int>> borrowed_documents;
 };
 
-#endif // DOCUMENT_MANAGER_H
+#endif // DOCUMENTMANAGER_H
