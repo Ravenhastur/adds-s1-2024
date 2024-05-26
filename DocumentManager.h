@@ -1,23 +1,24 @@
 #ifndef DOCUMENT_MANAGER_H
 #define DOCUMENT_MANAGER_H
 
+#include <string>
 #include <unordered_map>
 #include <unordered_set>
-#include <string>
-#include <vector>
-
-class Document {
-public:
-    std::string name;
-    int id;
-    int license_limit;
-    std::unordered_set<int> borrowedBy; // Set of patron IDs who have borrowed this document
-
-    Document(const std::string& name, int id, int license_limit);
-};
 
 class DocumentManager {
 private:
+    // Internal class to represent a document
+    class Document {
+    public:
+        std::string name;
+        int id;
+        int license_limit;
+        std::unordered_set<int> borrowedBy; // Set of patron IDs who have borrowed this document
+
+        Document(const std::string& name, int id, int license_limit)
+            : name(name), id(id), license_limit(license_limit) {}
+    };
+
     std::unordered_map<std::string, int> nameToDocID; // Map document name to document ID
     std::unordered_map<int, Document> docIDToDocument; // Map document ID to Document object
     std::unordered_set<int> patrons; // Set of registered patrons
